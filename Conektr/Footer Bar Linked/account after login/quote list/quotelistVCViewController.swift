@@ -34,16 +34,27 @@ class quotelistVCViewController: UIViewController {
     //MARK:- quote list table view
     let list = UI()
     
-    var arr = ["one","two","three"]
+    
     func quotelisttable(){
-        list.TableView(x: 0, y: header.frame.maxY, width: x, height: y-60-70, bkcolor: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), border: 0, borderColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), separatorColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), Sections: 1, SectionHeight: 0, SectionHEIGHT: {
+        
+        for _ in 0...13 {
+            let o = qhl()
+            o.date = "my date"
+            o.expirydate = "exp"
+            o.quoteno = "####"
+            o.quoteTotal = 1234
+            o.status = "pending"
+            
+            quoteHistorylistobj.append(o)
+        }
+        
+        list.TableView(x: 0, y: header.frame.maxY, width: x, height: y-60-70, bkcolor: #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), border: 0, borderColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), separatorColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), Sections: 1, SectionHeight: 0, SectionHEIGHT: {
         }, sectionView: {
-        }, rows: arr.count, Rows: {
-        }, editing: true, cellheight: 50, CellHeight: {
+        }, rows: quoteHistorylistobj.count, Rows: {
+        }, editing: true, cellheight: 300, CellHeight: {
         }, Cellview: {
             self.cellView()
         }, onDelete: {
-            
         }, view: body)
         
     }
@@ -52,8 +63,19 @@ class quotelistVCViewController: UIViewController {
         let cell = list.tableDelegate.cell
         let delegate = list.tableDelegate
         
+        let view = nibView(fileName: "quotelistcell", ownerClass: self) as! quotelistcell
+        view.frame = CGRect(x: 10, y: 10, width: cell.frame.size.width-20, height: cell.frame.size.height-20)
+        cell.addSubview(view)
         
-        cell.textLabel?.text = "\(arr[delegate.index])      (\(delegate.section),\(delegate.index))"
+        view.Input(quoteNo: quoteHistorylistobj[delegate.index].quoteno,
+                   date: quoteHistorylistobj[delegate.index].date,
+                   quotetotal: (quoteHistorylistobj[delegate.index].quoteTotal/100)*100,
+                   status: quoteHistorylistobj[delegate.index].status,
+                   expiryDate: quoteHistorylistobj[delegate.index].expirydate,
+                   any: self,
+                   action: #selector(self.actionBUTTON(_:)),
+                   actionTag: delegate.index)
+        
         
     }
     
@@ -66,5 +88,11 @@ class quotelistVCViewController: UIViewController {
     @IBAction func quoteBUTTON(_ sender: Any) {
         print("quote button")
     }
+    
+    @objc func actionBUTTON(_ btn:UIButton){
+        print("tag: \(btn.tag)")
+    }
+    
+    
     
 }

@@ -14,11 +14,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote #: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axD-ag-t4x">
-                    <rect key="frame" x="10" y="10" width="68" height="35"/>
+                    <rect key="frame" x="10" y="10" width="70.5" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="jc7-4j-tn1"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -68,7 +68,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="n/a" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qew-Fk-aKh">
-                    <rect key="frame" x="83" y="10" width="18" height="35"/>
+                    <rect key="frame" x="85.5" y="10" width="18" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="rnj-me-utC"/>
                     </constraints>

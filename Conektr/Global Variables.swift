@@ -334,6 +334,21 @@
                 var expirydate = String()
             }
             
+            var quoteHistoryProductListobj:[qhpl] = []
+            class qhpl{
+                var productname = String()
+                var variant = String()
+                var config = String()
+                var sku = String()
+                var origionalprice = Double()
+                var requestedprice = Double()
+                var approvedprice = Double()
+                var qty = Int()
+                var discountAmount = Double()
+                var subtotal = Double()
+            }
+            
+            
                 func TranslateText(label:UILabel){
                 SwiftGoogleTranslate.shared.translate(label.text!, "es", "en") { (text, error) in
                   if let t = text {

@@ -79,6 +79,11 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="button" destination="cVp-Ai-iCx" id="TYU-dm-IcJ"/>
                 <outlet property="distributor" destination="ih0-Np-ebc" id="I5S-Yy-PGd"/>

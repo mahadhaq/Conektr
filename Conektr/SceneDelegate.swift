@@ -19,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowscene.coordinateSpace.bounds)
         window?.windowScene = windowscene
         
-        window?.rootViewController = Dashboard()
+        window?.rootViewController = storyboardView(boardName: "quoteDetail", pageID: "quotedetailVC")
+        
         window?.makeKeyAndVisible()
     }
     

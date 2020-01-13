@@ -20,21 +20,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
                
-        SwiftGoogleTranslate.shared.start(with: "AIzaSyBVXCQBptg4VoEZ1fdow07xCQvv6oBFZbk")
-               let manager = NetworkingHelper.sharedNetworkManager
-               manager.requestSerializer = AFJSONRequestSerializer()
-               manager.responseSerializer = AFHTTPResponseSerializer()
-               let defaults = UserDefaults.standard
-               
-               if(defaults.bool(forKey: "IsLogined"))
-               {
-                   manager.saveToken(token: defaults.string(forKey: "Token")!)
-//                self.GetQuote(token: defaults.string(forKey: "Token")!)
-                
-               }
-               else{
-                defaults.set("", forKey: "quoteToken")
-        }
+//        SwiftGoogleTranslate.shared.start(with: "AIzaSyBVXCQBptg4VoEZ1fdow07xCQvv6oBFZbk")
+//               let manager = NetworkingHelper.sharedNetworkManager
+//               manager.requestSerializer = AFJSONRequestSerializer()
+//               manager.responseSerializer = AFHTTPResponseSerializer()
+//               let defaults = UserDefaults.standard
+//               
+//               if(defaults.bool(forKey: "IsLogined"))
+//               {
+//                   manager.saveToken(token: defaults.string(forKey: "Token")!)
+////                self.GetQuote(token: defaults.string(forKey: "Token")!)
+//                
+//               }
+//               else{
+//                defaults.set("", forKey: "quoteToken")
+//        }
                
         return true
     }

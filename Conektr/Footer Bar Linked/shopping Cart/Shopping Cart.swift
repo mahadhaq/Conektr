@@ -165,7 +165,7 @@ class sc: UIView {
         let sectionview = shoppingCart.list.tableDelegate.sectionview
         let delegate = shoppingCart.list.tableDelegate
         
-        let header = nibView(fineName: "cartheader", ownerClass: shoppingCart) as! cartheaderview
+        let header = nibView(fileName: "cartheader", ownerClass: shoppingCart) as! cartheaderview
         header.frame = sectionview.frame
         header.layer.borderWidth = 1
         header.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -193,7 +193,7 @@ class sc: UIView {
         let cell = shoppingCart.list.tableDelegate.cell
         let delegate = shoppingCart.list.tableDelegate
         
-        let view = nibView(fineName: "shoppingCartcell", ownerClass: shoppingCart) as! shoppingCartCell
+        let view = nibView(fileName: "shoppingCartcell", ownerClass: shoppingCart) as! shoppingCartCell
         view.frame = CGRect(x: 10, y: 10, width: cell.frame.size.width-20, height: cell.frame.size.height-20)
         cell.addSubview(view)
         
@@ -380,7 +380,7 @@ class sc: UIView {
     /////////   section Header arrow button
     //////////////////////////////////////
     @objc func SectionHeaderBUTTON(_ btn:UIButton){
-        
+        print("tag: \(btn.tag)  \(btn.currentTitle!)")
         for i in 0..<newcartobj.count {
             if i == btn.tag {
                 newcartobj[i].isSelected = true
