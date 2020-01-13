@@ -84,7 +84,7 @@ class quotedetailVC: UIViewController {
         let index = list.tableDelegate.index
         
         let view = nibView(fileName: "quoteDetailcell", ownerClass: self) as! quoteDetailcell
-        view.frame = CGRect(x: 10, y: 10, width: cell.frame.size.width-20, height: cell.frame.size.height)
+        view.frame = CGRect(x: 10, y: 10, width: cell.frame.size.width-20, height: cell.frame.size.height-20)
         cell.addSubview(view)
         
         let obj = quoteHistoryProductListobj[index]

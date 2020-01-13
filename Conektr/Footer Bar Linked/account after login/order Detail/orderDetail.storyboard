@@ -40,8 +40,7 @@
                         <outlet property="billingline4" destination="PXg-fN-W4G" id="Rqq-UL-7oO"/>
                         <outlet property="body" destination="cSM-ad-4xR" id="PzS-o3-NeO"/>
                         <outlet property="bottomeview" destination="lqG-rM-n9Y" id="Ou3-Y7-f4o"/>
-                        <outlet property="grandtotal" destination="BqQ-WN-feg" id="IUK-b9-Hrq"/>
-                        <outlet property="grandtotal_excl" destination="ic7-mb-xWg" id="o9P-z9-1fi"/>
+                        <outlet property="grandtotalExcl" destination="BqQ-WN-feg" id="4qk-oZ-aMP"/>
                         <outlet property="grandtotal_incl" destination="U04-xL-gEL" id="nAa-Lg-gvs"/>
                         <outlet property="orderdate" destination="7Pj-x1-Jhn" id="LQB-un-XZv"/>
                         <outlet property="orderno" destination="Knb-db-zWv" id="WZ9-9j-xvJ"/>

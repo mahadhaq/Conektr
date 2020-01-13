@@ -349,6 +349,24 @@
             }
             
             
+            
+            var orderdetailproductlistobj:[odpl] = []
+            class odpl {
+                var isSelected = false
+                var distributorid = Int()
+                var distributorName = String()
+                var product:[odprod] = []
+            }
+            class odprod {
+                var productname = String()
+                var vendor = String()
+                var sku = String()
+                var price = Double()
+                var subtotal = Double()
+                var ordered = Int()
+                var canceled = Int()
+            }
+            
                 func TranslateText(label:UILabel){
                 SwiftGoogleTranslate.shared.translate(label.text!, "es", "en") { (text, error) in
                   if let t = text {
