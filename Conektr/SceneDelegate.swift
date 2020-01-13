@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowscene.coordinateSpace.bounds)
         window?.windowScene = windowscene
         
-        window?.rootViewController = storyboardView(boardName: "orderDetail", pageID: "orderDetailVC")
+        window?.rootViewController = storyboardView(boardName: "reorderVC", pageID: "reorderVC")
         
         window?.makeKeyAndVisible()
     }

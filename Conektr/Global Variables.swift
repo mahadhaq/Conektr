@@ -367,25 +367,44 @@
                 var canceled = Int()
             }
             
-                func TranslateText(label:UILabel){
+            var reorderproductlistobj:[rop] = []
+            class rop{
+                var distributorid = String()
+                var distributorname = String()
+                var product:[ropl] = []
+            }
+            class ropl{
+                var productid = Int()
+                var isSelected = false
+                var image = UIImage()
+                var productname = String()
+                var vendor = String()
+                var price = Double()
+                var qty = Int()
+                var orderedqty = Int()
+            }
+            
+            
+            
+            func TranslateText(label:UILabel){
                 SwiftGoogleTranslate.shared.translate(label.text!, "es", "en") { (text, error) in
-                  if let t = text {
-                    DispatchQueue.main.async { // Make sure you're on the main thread here
-                        label.text = text
-                    }
+                    if let t = text {
+                        DispatchQueue.main.async { // Make sure you're on the main thread here
+                            label.text = text
+                        }
                         
-                  }
+                    }
                 }
             }
-                
+            
             func TranslateText(button:UIButton){
                 SwiftGoogleTranslate.shared.translate(button.titleLabel!.text!, "es", "en") { (text, error) in
-                  if let t = text {
-                    DispatchQueue.main.async { // Make sure you're on the main thread here
-                        button.setTitle(text, for: .normal)
-                    }
+                    if let t = text {
+                        DispatchQueue.main.async { // Make sure you're on the main thread here
+                            button.setTitle(text, for: .normal)
+                        }
                         
-                  }
+                    }
                 }
             }
             
