@@ -138,6 +138,7 @@ class Dashboard: UIViewController {
                     //                    _Pricing = op.count > 0 ? op[0].label! : "N/A"
                 }
             }
+            
             product.create(updateQuote: false, view: bodyfor.product.scrollview)
             tap.view?.layer.shadowOpacity = 0
         }
@@ -515,6 +516,7 @@ class Dashboard: UIViewController {
     
     
     
+    
     // MARK:-  VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -528,6 +530,14 @@ class Dashboard: UIViewController {
         
         let conregion = CountryAndRegionVC()
         conregion.CountriesAndRegion()
+        
+        
+        /*----------------------*/
+        
+        
+        
+        /*----------------------*/
+
         
         //////////////////////////////////////
         //////////////////////////////////////

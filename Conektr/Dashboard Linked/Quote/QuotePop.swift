@@ -80,7 +80,7 @@ class qp: UIView {
 //        quotelistobj[quotelistobj.count-1].price = 12.213+Double(quotelistobj.count)
 //        quotelistobj[quotelistobj.count-1].quantity = 4+quotelistobj.count
         
-        quotepop.list.TableView(x: 0, y: quotepop.header.view.frame.maxY, width: quotepop.scroll.scrollview.frame.size.width, height: quotepop.scroll.scrollview.frame.size.height-quotepop.header.view.frame.maxY, bkcolor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), border: 1, borderColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), separatorColor: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), Rows: quotelistobj.count, editing: true, cellheight: 130, CellHeight: {
+        quotepop.list.TableView(x: 0, y: quotepop.header.view.frame.maxY, width: quotepop.scroll.scrollview.frame.size.width, height: quotepop.scroll.scrollview.frame.size.height-quotepop.header.view.frame.maxY, bkcolor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), border: 1, borderColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), separatorColor: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), Sections: 1, SectionHeight: 0, SectionHEIGHT: {}, sectionView: {}, rows: quotelistobj.count, Rows: {}, editing: true, cellheight: 130, CellHeight: {
             
         }, Cellview: {
             quotepop.cellView()

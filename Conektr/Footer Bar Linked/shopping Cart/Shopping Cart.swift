@@ -16,58 +16,6 @@ class sc: UIView {
     
     
     
-    /*--------------------------------------------------------------*/
-    ///////////////////////////////////////////
-    //////////////////////////////////////////
-    //////////////////// BUTTON
-    //////////////////////////////////////////
-    @objc func updateShoppingCartButton(_ btn:UIButton){
-        print("update shoppingcart")
-    }
-    ///////////////////////////////////////////
-    //////////////////////////////////////////
-    //////////////////// BUTTON
-    //////////////////////////////////////////
-    @objc func movetoShopListButton(_ btn:UIButton){
-        print("move to Shop List")
-    }
-    ///////////////////////////////////////////
-    //////////////////////////////////////////
-    //////////////////// BUTTON
-    //////////////////////////////////////////
-    @objc func removeItembtnButton(_ btn:UIButton){
-        print("remove item")
-    }
-    ///////////////////////////////////////////
-    //////////////////////////////////////////
-    //////////////////// BUTTON
-    //////////////////////////////////////////
-    @objc func quoteButton(_ btn:UIButton){
-        print("quote button")
-    }
-    ///////////////////////////////////////////
-    //////////////////////////////////////////
-    //////////////////// BUTTON
-    //////////////////////////////////////////
-    @objc func checkoutButton(_ btn:UIButton){
-        print("checkout button")
-    }
-    ///////////////////////////////////////////
-    //////////////////////////////////////////
-    //////////////////// BUTTON
-    //////////////////////////////////////////
-    @objc func requestquoteButton(_ btn:UIButton){
-        print("request quote button")
-    }
-    ///////////////////////////////////////////
-    //////////////////////////////////////////
-    //////////////////// BUTTON
-    //////////////////////////////////////////
-    @objc func discountButton(_ btn:UIButton){
-        print("add discount button")
-    }
-    
-    /*--------------------------------------------------------------*/
     
     
     
@@ -81,8 +29,7 @@ class sc: UIView {
     var parentbody = UIScrollView()
     let header = UI()
     
-    let productlist = UI()
-    let productlistprice = UI()
+    let list = UI()
     
     let summary = UI()
     let shipping = UI()
@@ -98,6 +45,8 @@ class sc: UIView {
     let checkoutbtn = UI()
     let requestquotebtn = UI()
     
+    //MARK:- CREATE
+    
     func Create(view:UIScrollView) {
         shoppingCart.parentbody = view
         ///////////////////////////////////////////////////////
@@ -107,20 +56,7 @@ class sc: UIView {
         shoppingCart.header.View(x: 0, y: shoppingCart.header.label.frame.maxY, width: x, height: 1, bkcolor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), cornerRadius: 0, border: 0, borderColor: .clear, view: view)
         
         //PRODUCT LIST
-        shoppingCart.productlist.View(x: 10, y: shoppingCart.header.view.frame.maxY+30, width: x-20, height: 70, bkcolor: #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1), cornerRadius: 0, border: 0, borderColor: .clear, view: view)
-        shoppingCart.productlist.line(p1: CGPoint(x: 10, y: shoppingCart.productlist.view.frame.maxY), p2: CGPoint(x: x-10, y: shoppingCart.productlist.view.frame.maxY), lineWidth: 2, color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), view: view)
-        shoppingCart.productlist.Label(x: 10, y: 0, width: 150, height: 70, txt: "PRODUCTS", fontsize: 16, bold: false, cornerRadius: 0, border: 0, borderColor: .clear, alignment: .left, bkcolor: .clear, txtcolor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), view: shoppingCart.productlist.view)
-        shoppingCart.productlistprice.Label(x: shoppingCart.productlist.label.frame.maxX, y: 0, width: 150, height: 70, txt: "Grandtotal \nAED\(0.0)", fontsize: 16, bold: false, cornerRadius: 0, border: 0, borderColor: .clear, alignment: .center, bkcolor: .clear, txtcolor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), view: shoppingCart.productlist.view)
-        shoppingCart.productlist.CheckBox(x: x-50, y: 30, width: 20, height: 10, trueImage: UIImage(named: "redup")!, falseImage: UIImage(named: "reddown")!, isTrue: false, view: shoppingCart.productlist.view) {
-            if(shoppingCart.productlist.isCheckBoxChecked){
-                shoppingCart.productbody.view.isHidden = false
-                shoppingCart.updateframe()
-            }
-            else{
-                shoppingCart.productbody.view.isHidden = true
-                shoppingCart.updateframe()
-            }
-        }
+        
         shoppingCart.productlistUI()
         
         
@@ -128,7 +64,7 @@ class sc: UIView {
         
         
         /// SUMMARY
-        shoppingCart.summary.View(x: 10, y: shoppingCart.productlist.view.frame.maxY+30, width: x-20, height: 500, bkcolor: #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1), cornerRadius: 0, border: 0, borderColor: .clear, view: view)
+        shoppingCart.summary.View(x: 10, y: shoppingCart.list.table.frame.maxY+30, width: x-20, height: 500, bkcolor: #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1), cornerRadius: 0, border: 0, borderColor: .clear, view: view)
         shoppingCart.summary.Label(x: 10, y: 0, width: 150, height: 40, txt: "Summary", fontsize: 16, bold: false, cornerRadius: 0, border: 0, borderColor: .clear, alignment: .left, bkcolor: .clear, txtcolor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), view: shoppingCart.summary.view)
         shoppingCart.summary.line(p1: CGPoint(x: 10, y: shoppingCart.summary.label.frame.maxY), p2: CGPoint(x: x-30, y: shoppingCart.summary.label.frame.maxY), lineWidth: 2, color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), view: shoppingCart.summary.view)
         
@@ -205,117 +141,92 @@ class sc: UIView {
     
     
     
+    //MARK:- Product List
     
-    
+    // SHOPPING CART Product LIST
     // PRODUCT LIST VIEW
-    let productbody = UI()
-    var pview:[UI] = []
-    var pdistname:[UI] = []
-    var paction:[UI] = []
-    var pimag:[UI] = []
-    var ptitle:[UI] = []
-    var ppricelabel:[UI] = []
-    var pprice:[UI] = []
-    var pquantity:[UI] = []
-    var psubtotallabel:[UI] = []
-    var psubtotal:[UI] = []
-    var updateShoppingCartbtn = UI()
-    var movetoShopListbtn = UI()
-    var removeItembtn = UI()
+    
     
     func productlistUI() {
-        shoppingCart.productbody.View(x: 10, y: shoppingCart.productlist.view.frame.maxY, width: x-20, height: 10, bkcolor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), cornerRadius: 0, border: 0, borderColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), view: shoppingCart.parentbody)
-        shoppingCart.productbody.view.isHidden = true
         
-        let pv = shoppingCart.productbody.view
+        oldCartModel_to_New()
+        shoppingCart.list.TableView(x: 10, y: shoppingCart.header.view.frame.maxY, width: x-20, height: 500, bkcolor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), border: 0, borderColor: .clear, separatorColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), Sections: newcartobj.count, SectionHeight: 120, SectionHEIGHT: {}, sectionView: {
+            shoppingCart.sectionView()
+        }, rows: 0, Rows: {
+            shoppingCart.rows()
+        }, editing: false, cellheight: 250, CellHeight: {}, Cellview: {
+            shoppingCart.cellview()
+        }, onDelete: {
+        }, view: shoppingCart.parentbody)
+        shoppingCart.list.table.reloadData()
+    }
+    
+    func sectionView(){
+        let sectionview = shoppingCart.list.tableDelegate.sectionview
+        let delegate = shoppingCart.list.tableDelegate
         
-        for obj in shoppingCart.pview {obj.view.removeFromSuperview()}
-        for obj in shoppingCart.pdistname {obj.label.removeFromSuperview()}
-        for obj in shoppingCart.paction {obj.label.removeFromSuperview();obj.clickableimg.removeFromSuperview()}
-        for obj in shoppingCart.pimag {obj.imag.removeFromSuperview()}
-        for obj in shoppingCart.ptitle {obj.label.removeFromSuperview()}
-        for obj in shoppingCart.ppricelabel {obj.label.removeFromSuperview()}
-        for obj in shoppingCart.pprice {obj.label.removeFromSuperview()}
-        for obj in shoppingCart.pquantity {obj.label.removeFromSuperview();obj.txtfield.removeFromSuperview()}
-        for obj in shoppingCart.psubtotallabel {obj.label.removeFromSuperview()}
-        for obj in shoppingCart.psubtotal {obj.label.removeFromSuperview()}
-        shoppingCart.pview.removeAll()
-        shoppingCart.pdistname.removeAll()
-        shoppingCart.paction.removeAll()
-        shoppingCart.pimag.removeAll()
-        shoppingCart.ptitle.removeAll()
-        shoppingCart.ppricelabel.removeAll()
-        shoppingCart.pprice.removeAll()
-        shoppingCart.pquantity.removeAll()
-        shoppingCart.psubtotallabel.removeAll()
-        shoppingCart.psubtotal.removeAll()
+        let header = nibView(fineName: "cartheader", ownerClass: shoppingCart) as! cartheaderview
+        header.frame = sectionview.frame
+        header.layer.borderWidth = 1
+        header.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        sectionview.addSubview(header)
         
-        var total:Double = 0.0
-        var top:CGFloat = 10
-        for obj in cartobj {
-            shoppingCart.pview.append(UI())
-            shoppingCart.pdistname.append(UI())
-            shoppingCart.paction.append(UI())
-            shoppingCart.pimag.append(UI())
-            shoppingCart.ptitle.append(UI())
-            shoppingCart.ppricelabel.append(UI())
-            shoppingCart.pprice.append(UI())
-            shoppingCart.pquantity.append(UI())
-            shoppingCart.psubtotallabel.append(UI())
-            shoppingCart.psubtotal.append(UI())
-
-            shoppingCart.pview[shoppingCart.pview.count-1].View(x: 10, y: top, width: pv.frame.size.width-20, height: 220, bkcolor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), cornerRadius: 5, border: 1, borderColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), view: pv)
-            let v = shoppingCart.pview[shoppingCart.pview.count-1].view
-            
-            //distributor name
-            shoppingCart.pdistname[shoppingCart.pdistname.count-1].Label(x: 10, y: 0, width: v.frame.size.width-20, height: 40, txt: "Distributor: \(obj.distributorName)", fontsize: 16, bold: false, cornerRadius: 3, border: 1, borderColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), alignment: .center, bkcolor: .clear, txtcolor: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), view: v)
-            
-            //action
-            shoppingCart.paction[shoppingCart.paction.count-1].Label(x: 10, y: 40, width: 50, height: 50, txt: "Action", fontsize: 16, bold: false, cornerRadius: 0, border: 0, borderColor: .clear, alignment: .left, bkcolor: .clear, txtcolor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), view: v)
-            shoppingCart.paction[shoppingCart.paction.count-1].clickableimage(x: 20, y: shoppingCart.paction[shoppingCart.paction.count-1].label.frame.maxY, width: 20, height: 20, image: UIImage(named: "checkfalse")!, cornerRadius: 0, borderWidth: 0, borderColor: .clear, function: #selector(shoppingCart.pactionButton(_:)), any: shoppingCart, view: v)
-            shoppingCart.paction[shoppingCart.paction.count-1].clickableimg.tag = obj.id
-            
-            //image
-            shoppingCart.pimag[shoppingCart.paction.count-1].Image(x: 70, y: 40, width: 100, height: 100, mode: .scaleAspectFit, src: obj.imag, view: v, imageUrl: nil)
-            
-            //title
-            shoppingCart.ptitle[shoppingCart.ptitle.count-1].Label(x: shoppingCart.pimag[shoppingCart.paction.count-1].imag.frame.maxX, y: 40, width: v.frame.size.width-80-shoppingCart.pimag[shoppingCart.paction.count-1].imag.frame.size.width, height: 100, txt: obj.title, fontsize: 16, bold: false, cornerRadius: 0, border: 0, borderColor: .clear, alignment: .left, bkcolor: .clear, txtcolor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), view: v)
-            shoppingCart.pprice[shoppingCart.pprice.count-1].View(x: 10, y: 140, width: v.frame.size.width-20, height: 1, bkcolor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), cornerRadius: 0, border: 0, borderColor: .clear, view: v)
-            
-            //price
-            shoppingCart.ppricelabel[shoppingCart.ppricelabel.count-1].Label(x: 10, y: 142, width: v.frame.size.width/3, height: 30, txt: "Price:", fontsize: 16, bold: false, cornerRadius: 0, border: 0, borderColor: .clear, alignment: .left, bkcolor: .clear, txtcolor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), view: v)
-            shoppingCart.pprice[shoppingCart.pprice.count-1].Label(x: 10, y: 172, width: v.frame.size.width/3, height: 30, txt: "AUD\(obj.price)", fontsize: 16, bold: false, cornerRadius: 0, border: 0, borderColor: .clear, alignment: .left, bkcolor: .clear, txtcolor: #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1), view: v)
-            
-            
-            //quantity
-            shoppingCart.pquantity[shoppingCart.pquantity.count-1].Label(x: (v.frame.size.width/2)-30, y: 142, width: 60, height: 30, txt: "Qty:", fontsize: 16, bold: false, cornerRadius: 0, border: 0, borderColor: .clear, alignment: .center, bkcolor: .clear, txtcolor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), view: v)
-            shoppingCart.pquantity[shoppingCart.pquantity.count-1].Textfield(x: (v.frame.size.width/2)-20, y: 172, width: 40, height: 30, placeholder: "", border: 1, borderRadius: 5, txtAlign: .center, bordercolor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), keyboard: .numberPad, textColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), bkcolor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), view: v)
-            shoppingCart.pquantity[shoppingCart.pquantity.count-1].txtfield.text = "\(obj.quantity)"
-            
-            //sub total
-            shoppingCart.psubtotallabel[shoppingCart.psubtotallabel.count-1].Label(x: v.frame.size.width-90, y: 142, width: 80, height: 30, txt: "Subtotal", fontsize: 16, bold: false, cornerRadius: 0, border: 0, borderColor: .clear, alignment: .right, bkcolor: .clear, txtcolor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), view: v)
-            shoppingCart.psubtotal[shoppingCart.psubtotal.count-1].Label(x: v.frame.size.width-90, y: 172, width: 80, height: 30, txt: "AED\(obj.price*Double(obj.quantity))", fontsize: 16, bold: false, cornerRadius: 0, border: 0, borderColor: .clear, alignment: .right, bkcolor: .clear, txtcolor: #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1), view: v)
-            total+=obj.price*Double(obj.quantity)
-            shoppingCart.productlistprice.label.text = "Grandtotal \nAED\(total)"
-            top = v.frame.maxY + 10
-                        
+        header.Input(distributor: newcartobj[delegate.section].distributorName,
+                     grandtotal: grandTotal(section: delegate.section),
+                     any: shoppingCart,
+                     button: #selector(SectionHeaderBUTTON(_:)),
+                     buttonTag: delegate.section)
+        
+    }
+    func rows(){
+        let delegate = shoppingCart.list.tableDelegate
+        
+        if newcartobj[delegate.section].isSelected {
+            delegate.numberOFrows = newcartobj[delegate.section].product.count
         }
-        shoppingCart.updateShoppingCartbtn.Button(x: (x/2)-100, y: top+10, width: 200, height: 40, title: "Update Shopping Cart", fontsize: 14, any: shoppingCart, function: #selector(shoppingCart.updateShoppingCartButton(_:)), cornerRadius: 0, bordercolor: .clear, bkcolor: #colorLiteral(red: 0.4392156863, green: 0.2784313725, blue: 0.6196078431, alpha: 1), txtcolor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), view: pv)
-        shoppingCart.movetoShopListbtn.Button(x: (x/2)-100, y: top+60, width: 200, height: 40, title:"Update Shopping Cart", fontsize: 14 , any: shoppingCart, function: #selector(shoppingCart.movetoShopListButton(_:)), cornerRadius: 0, bordercolor: .clear, bkcolor: #colorLiteral(red: 0.4392156863, green: 0.2784313725, blue: 0.6196078431, alpha: 1), txtcolor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), view: pv)
-        shoppingCart.removeItembtn.Button(x: (x/2)-100, y: top+110, width: 200, height: 40, title:"Update Shopping Cart", fontsize: 14 , any: shoppingCart, function: #selector(shoppingCart.removeItembtnButton(_:)), cornerRadius: 0, bordercolor: .clear, bkcolor: #colorLiteral(red: 0.4392156863, green: 0.2784313725, blue: 0.6196078431, alpha: 1), txtcolor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), view: pv)
-        pv.frame.size.height = top+150
+        else{
+            delegate.numberOFrows = 0
+        }
+        
+    }
+    func cellview(){
+        let cell = shoppingCart.list.tableDelegate.cell
+        let delegate = shoppingCart.list.tableDelegate
+        
+        let view = nibView(fineName: "shoppingCartcell", ownerClass: shoppingCart) as! shoppingCartCell
+        view.frame = CGRect(x: 10, y: 10, width: cell.frame.size.width-20, height: cell.frame.size.height-20)
+        cell.addSubview(view)
+        
+        
+        let obj = newcartobj[delegate.section].product[delegate.index]
+        view.Input(any: shoppingCart,
+                   action: #selector(actionBUTTON(_:)),
+                   actionTag: delegate.index,
+                   image: obj.imag,
+                   productTitle: obj.name ?? "n/a",
+                   Qty: obj.qty ?? 0,
+                   price: obj.price,
+                   subtotal: 0.0)
         
     }
     
     
-    @objc func pactionButton(_ btn:UIButton){
-        if btn.currentBackgroundImage == UIImage(named: "checkfalse") {
-            btn.setBackgroundImage(UIImage(named: "checktrue")!, for: .normal)
+    
+    
+    func grandTotal(section:Int)->Double{
+        var total = Double()
+        for obj in newcartobj[section].product {
+            total+=obj.price
         }
-        else{btn.setBackgroundImage(UIImage(named: "checkfalse")!, for: .normal)}
+        return (total/100)*100
     }
     
     
+    
+    
+    
+    
+    //MARK:- SHIPPING
     
     // SHIPPING VIEW
     let shippingtitle = UI()
@@ -390,10 +301,7 @@ class sc: UIView {
     
     // Update frame
     func updateframe() {
-        if shoppingCart.productbody.view.isHidden {
-            shoppingCart.summary.view.frame.origin.y = shoppingCart.productlist.view.frame.maxY+30}
-        else{shoppingCart.summary.view.frame.origin.y = shoppingCart.productbody.view.frame.maxY+30}
-        
+        shoppingCart.summary.view.frame.origin.y = shoppingCart.list.table.frame.maxY
         if shoppingCart.shipping.view.isHidden {
             shoppingCart.summarydetail.view.frame.origin.y = shoppingCart.shipping.label.frame.maxY}
         else{shoppingCart.summarydetail.view.frame.origin.y = shoppingCart.shipping.view.frame.maxY}
@@ -410,4 +318,87 @@ class sc: UIView {
         shoppingCart.summary.view.frame.size.height = shoppingCart.requestquotebtn.button.frame.maxY+40
         shoppingCart.parentbody.contentSize.height = shoppingCart.summary.view.frame.maxY+50
     }
+    
+    
+    
+    
+    
+    
+    //MARK:- BUTTONS
+    /*--------------------------------------------------------------*/
+    ///////////////////////////////////////////
+    //////////////////////////////////////////
+    //////////////////// BUTTON
+    //////////////////////////////////////////
+    @objc func updateShoppingCartButton(_ btn:UIButton){
+        print("update shoppingcart")
+    }
+    ///////////////////////////////////////////
+    //////////////////////////////////////////
+    //////////////////// BUTTON
+    //////////////////////////////////////////
+    @objc func movetoShopListButton(_ btn:UIButton){
+        print("move to Shop List")
+    }
+    ///////////////////////////////////////////
+    //////////////////////////////////////////
+    //////////////////// BUTTON
+    //////////////////////////////////////////
+    @objc func removeItembtnButton(_ btn:UIButton){
+        print("remove item")
+    }
+    ///////////////////////////////////////////
+    //////////////////////////////////////////
+    //////////////////// BUTTON
+    //////////////////////////////////////////
+    @objc func quoteButton(_ btn:UIButton){
+        print("quote button")
+    }
+    ///////////////////////////////////////////
+    //////////////////////////////////////////
+    //////////////////// BUTTON
+    //////////////////////////////////////////
+    @objc func checkoutButton(_ btn:UIButton){
+        print("checkout button")
+    }
+    ///////////////////////////////////////////
+    //////////////////////////////////////////
+    //////////////////// BUTTON
+    //////////////////////////////////////////
+    @objc func requestquoteButton(_ btn:UIButton){
+        print("request quote button")
+    }
+    ///////////////////////////////////////////
+    //////////////////////////////////////////
+    //////////////////// BUTTON
+    //////////////////////////////////////////
+    @objc func discountButton(_ btn:UIButton){
+        print("add discount button")
+    }
+    
+    ////////////////////////////////////////
+    /////////   section Header arrow button
+    //////////////////////////////////////
+    @objc func SectionHeaderBUTTON(_ btn:UIButton){
+        
+        for i in 0..<newcartobj.count {
+            if i == btn.tag {
+                newcartobj[i].isSelected = true
+            }
+            else{
+                newcartobj[i].isSelected = false
+            }
+        }
+        shoppingCart.list.table.reloadData()
+    }
+    
+    /////////////////////////// product action button checkbox
+    @objc func actionBUTTON(_ btn:UIButton){
+        print("btntag: \(btn.tag)")
+    }
+    /*--------------------------------------------------------------*/
+    
+    
+    
+    
 }

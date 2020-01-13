@@ -157,6 +157,7 @@
                 var variantlist:[vlist] = []
                 var configlist:[clist] = []
             }
+            
             var billingAddObj:[Address] = []
             var SelectedBillingAddress:Address = Address()
             var IsBillingSame:Int = 1
@@ -188,8 +189,94 @@
                 var productType:String? = String()
                 var quoteID:String? = String()
                 
-                
             }
+            
+            var newcartobj:[newcart] = []
+            class newcart {
+                var isSelected = false
+                var distributorid = Int()
+                var distributorName = String()
+                var product:[cartproduct] = []
+            }
+            class cartproduct {
+                var id = Int()
+                var imag = UIImage()
+                var imgUrl = String()
+                var title = String()
+                //    var sku = String()
+                var price = Double()
+                //    var discount = Double()
+                var quantity = Int()
+                //    var description = String()
+                //    var config = String()
+                var variant = String()
+                //    var pricing = String()
+                
+                
+                var itemID:Int? = Int()
+                var sku:String? = String()
+                var qty:Int? = Int()
+                var name:String? = String()
+                //    var price:Int? = Int()
+                var productType:String? = String()
+                var quoteID:String? = String()
+            }
+            
+            
+            
+            func oldCartModel_to_New() {
+                
+                newcartobj.removeAll()
+                for cart in cartobj {
+                    var enter = true
+                    newcartobj.filter{$0.distributorName == cart.distributorName}.first.map {
+                        enter = false
+                        let obj = cartproduct()
+                        obj.id = cart.id
+                        obj.imag = cart.imag
+                        obj.imgUrl = cart.imgUrl
+                        obj.itemID = cart.itemID
+                        obj.name = cart.name
+                        obj.price = cart.price
+                        obj.productType = cart.productType
+                        obj.qty = cart.qty
+                        obj.quantity = cart.quantity
+                        obj.quoteID = cart.quoteID
+                        obj.sku = cart.sku
+                        obj.title = cart.title
+                        obj.variant = cart.variant
+                        $0.product.append(obj)
+                    }
+                    if enter {
+                        newcartobj.append(newcart())
+                        newcartobj[newcartobj.count-1].distributorid = cart.distributorID
+                        newcartobj[newcartobj.count-1].distributorName = cart.distributorName
+                        
+                        let obj = cartproduct()
+                        obj.id = cart.id
+                        obj.imag = cart.imag
+                        obj.imgUrl = cart.imgUrl
+                        obj.itemID = cart.itemID
+                        obj.name = cart.name
+                        obj.price = cart.price
+                        obj.productType = cart.productType
+                        obj.qty = cart.qty
+                        obj.quantity = cart.quantity
+                        obj.quoteID = cart.quoteID
+                        obj.sku = cart.sku
+                        obj.title = cart.title
+                        obj.variant = cart.variant
+                        newcartobj[newcartobj.count-1].product.append(obj)
+                    }
+                    
+                }
+            }
+            
+            
+            
+            
+            
+            
             var shippingAddress:[sa] = []
             class sa {
                 var isselected = false
@@ -238,6 +325,14 @@
                 var qty = Int()
             }
             
+            var quoteHistorylistobj:[qhl] = []
+            class qhl {
+                var quoteno = String()
+                var date = String()
+                var quoteTotal = Double()
+                var status = String()
+                var expirydate = String()
+            }
             
                 func TranslateText(label:UILabel){
                 SwiftGoogleTranslate.shared.translate(label.text!, "es", "en") { (text, error) in

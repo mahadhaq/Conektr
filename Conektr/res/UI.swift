@@ -39,9 +39,16 @@ class UI: UIView {
     
     
     /*---------------------------*/
-    func TableView(x:CGFloat,y:CGFloat,width:CGFloat,height:CGFloat,bkcolor:UIColor,border:CGFloat,borderColor:UIColor,separatorColor:UIColor,Rows:Int,editing:Bool,cellheight:CGFloat,CellHeight:@escaping () -> Void,Cellview:@escaping () -> Void,onDelete:@escaping () -> Void,view:UIView) {
+    func TableView(x:CGFloat,y:CGFloat,width:CGFloat,height:CGFloat,bkcolor:UIColor,border:CGFloat,borderColor:UIColor,separatorColor:UIColor,Sections:Int,SectionHeight:CGFloat,SectionHEIGHT:@escaping () -> Void,sectionView:@escaping () -> Void,rows:Int,Rows:@escaping () -> Void,editing:Bool,cellheight:CGFloat,CellHeight:@escaping () -> Void,Cellview:@escaping () -> Void,onDelete:@escaping () -> Void,view:UIView) {
         
-        tableDelegate.use(editing: editing, numberOFrows: Rows, cellheight: cellheight, CellHeight: {
+        tableDelegate.use(editing: editing, numberOFsections: Sections, sectionHeight: SectionHeight, SectionHeight: {
+            SectionHEIGHT()
+        }, sectionView: {
+            sectionView()
+        }, numberOFrows: rows, Numberofrows: {
+            Rows()
+        }
+, cellheight: cellheight, CellHeight: {
             CellHeight()
         }, Cellview: {
             Cellview()
@@ -999,36 +1006,56 @@ extension UITextField {
 
 // MARK:- TableView Delegate
 class TVC:UIView,UITableViewDelegate,UITableViewDataSource {
+    
     var numberOFrows = Int()
+    var Rows:() -> () = {}
+    
     var cellheight = CGFloat()
     var CellHeight:() -> () = {}
     var cellview:() -> () = {}
-    var ondelete:() -> () = {}
     var cell = UITableViewCell()
-    var index = Int()
-    var editing = false
     
-    func Cellheight(at:Int,height:CGFloat,oldheight:CGFloat) {
-        if index == at {cellheight = height}
-        else{cellheight = oldheight}
-    }
-    func use(editing:Bool,numberOFrows:Int,cellheight:CGFloat,CellHeight:@escaping () -> Void,Cellview:@escaping () -> Void,onDel:@escaping () -> Void) {
+    var sectionview = UIView()
+    
+    var numberOFsections = Int()
+    var sectionheight = CGFloat()
+    var SectionHeight:() -> () = {}
+    var sectionView:() -> () = {}
+    
+    var index = Int()
+    var section = Int()
+    var editing = false
+    var ondelete:() -> () = {}
+
+    func use(editing:Bool,numberOFsections:Int,sectionHeight:CGFloat,SectionHeight:@escaping () -> Void,sectionView:@escaping () -> Void,numberOFrows:Int,Numberofrows:@escaping () -> Void,cellheight:CGFloat,CellHeight:@escaping () -> Void,Cellview:@escaping () -> Void,onDel:@escaping () -> Void) {
         self.editing = editing
+        self.ondelete = {onDel()}
+
         self.numberOFrows = numberOFrows
+        self.Rows = {Numberofrows()}
+            
         self.cellheight = cellheight
         self.CellHeight = {CellHeight()}
         self.cellview = {Cellview()}
-        self.ondelete = {onDel()}
+        
+        self.numberOFsections = numberOFsections
+        self.sectionheight = sectionHeight
+        self.SectionHeight = {SectionHeight()}
+        
+        self.sectionView = {sectionView()}
     }
     
     // UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.section = section
+        self.Rows()
         return numberOFrows
     }
     
     // UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        self.section = indexPath.section
         self.index = indexPath.row
         self.cellview()
         return cell
@@ -1049,9 +1076,30 @@ class TVC:UIView,UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         index = indexPath.row
+        section = indexPath.section
         if editingStyle == .delete {
             self.ondelete()
         }
+    }
+    
+    
+    // number of section
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return numberOFsections
+    }
+    // section header height
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        self.section = section
+        self.SectionHeight()
+        return sectionheight
+    }
+    // section view header
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: sectionheight))
+        self.section = section
+        sectionview = view
+        sectionView()
+        return sectionview
     }
     
 }

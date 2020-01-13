@@ -634,6 +634,10 @@ func storyboardView(boardName:String,pageID:String) -> UIViewController {
     return         UIStoryboard(name: boardName, bundle: nil).instantiateViewController(identifier: pageID)
 }
 
+func nibView(fineName:String,ownerClass:Any) -> UIView{
+    
+    return Bundle.main.loadNibNamed(fineName, owner: ownerClass, options: nil)![0] as! UIView
+}
 
 extension Double {
     func roundToDecimal(_ fractionDigits: Int) -> Double {

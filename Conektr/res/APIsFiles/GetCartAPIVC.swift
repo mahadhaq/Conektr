@@ -54,6 +54,8 @@ class GetCartAPIVC: UIViewController {
                     for obj in array.data ?? []
                     {
                         var crt = cart()
+//                        crt.distributorID = obj.
+//                        crt.distributorName =
                         crt.itemID = obj.itemID
                         crt.id = obj.itemID!
                         crt.sku = obj.sku
